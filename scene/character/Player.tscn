@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Asset/Player/Battlemage Complete (Sprite Sheet)/Idle/Battlemage Idle.png" type="Texture" id=1]
 [ext_resource path="res://Script/Player.gd" type="Script" id=2]
@@ -449,11 +449,6 @@ animation = "sword-combo-3"
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
 switch_mode = 2
@@ -462,10 +457,6 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
 switch_mode = 2
 auto_advance = true
 
@@ -482,18 +473,13 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
 switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id=14]
 states/dash/node = SubResource( 37 )
@@ -502,13 +488,13 @@ states/idle/node = SubResource( 21 )
 states/idle/position = Vector2( 564, 122 )
 states/run/node = SubResource( 22 )
 states/run/position = Vector2( 910, 102 )
-states/sword-combo-1/node = SubResource( 23 )
-states/sword-combo-1/position = Vector2( 947, -73.816 )
-states/sword-combo-2/node = SubResource( 24 )
-states/sword-combo-2/position = Vector2( 691, -80.776 )
-states/sword-combo-3/node = SubResource( 25 )
-states/sword-combo-3/position = Vector2( 416, -59.776 )
-transitions = [ "idle", "run", SubResource( 26 ), "run", "idle", SubResource( 27 ), "idle", "sword-combo-1", SubResource( 28 ), "sword-combo-1", "idle", SubResource( 29 ), "sword-combo-1", "sword-combo-2", SubResource( 32 ), "sword-combo-2", "sword-combo-3", SubResource( 33 ), "sword-combo-3", "idle", SubResource( 34 ), "sword-combo-2", "idle", SubResource( 35 ), "idle", "dash", SubResource( 38 ), "dash", "run", SubResource( 39 ), "run", "dash", SubResource( 40 ), "dash", "idle", SubResource( 41 ), "run", "sword-combo-1", SubResource( 42 ), "sword-combo-1", "run", SubResource( 43 ), "sword-combo-2", "run", SubResource( 44 ), "sword-combo-3", "run", SubResource( 45 ) ]
+states/sword1/node = SubResource( 23 )
+states/sword1/position = Vector2( 946, -73.816 )
+states/sword2/node = SubResource( 24 )
+states/sword2/position = Vector2( 691, -80.776 )
+states/sword3/node = SubResource( 25 )
+states/sword3/position = Vector2( 416, -59.776 )
+transitions = [ "idle", "run", SubResource( 26 ), "run", "idle", SubResource( 27 ), "idle", "sword1", SubResource( 28 ), "sword1", "sword2", SubResource( 32 ), "sword2", "sword3", SubResource( 33 ), "sword3", "idle", SubResource( 34 ), "idle", "dash", SubResource( 38 ), "dash", "run", SubResource( 39 ), "run", "dash", SubResource( 40 ), "dash", "idle", SubResource( 41 ), "sword1", "idle", SubResource( 42 ), "sword2", "idle", SubResource( 43 ), "run", "sword1", SubResource( 44 ) ]
 start_node = "idle"
 graph_offset = Vector2( 0, -123.183 )
 
@@ -522,7 +508,7 @@ script = ExtResource( 2 )
 position = Vector2( 168.333, 101.333 )
 scale = Vector2( 1.011, 1 )
 texture = ExtResource( 5 )
-vframes = 10
+vframes = 8
 frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -551,5 +537,11 @@ parameters/playback = SubResource( 15 )
 position = Vector2( 184.833, 112.834 )
 
 [node name="dash" parent="." instance=ExtResource( 9 )]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="Hitbox"]
